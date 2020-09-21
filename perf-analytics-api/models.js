@@ -18,8 +18,12 @@ const analyticsSchema = new Schema({
     type: String,
     required: false
   },
+  createdAt: {
+    type: Number,
+    required: true
+  }
 }, {
-  timestamps: true
+  timestamps: false
 });
 
 const Analytics = mongoose.model('analytic', analyticsSchema);

@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(express.static(__dirname+ '/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.use((req, res, next) => {
   requestCount++;
@@ -34,13 +34,35 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', 'false');
   res.setHeader('Access-Control-Max-Age', '86400');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  res.setHeader('Content-Type', 'application/json');
   console.log(req.method);
-  if (req.method === 'GET') {
+  if ( req.method === 'OPTIONS' ) {
     res.statusCode = 200;
-    res.end('<html><body><h1>Success 200: ' + req.method +
-      ' method</h1></body></html>');
-  }
-  else if (req.method === 'POST') {
+    res.end();
+  } else if ( req.method === 'GET' ) {
+    res.statusCode = 200;
+    const { beginTime, endTime } = req.query;
+
+    console.log(Number(beginTime), Number(endTime))
+    return Analytics.find({
+      $and:
+        [
+          {
+            createdAt:
+              { $gt: Number(beginTime) }
+          },
+          {
+            createdAt:
+              { $lte: Number(endTime) }
+          }
+        ]
+    })
+      .then((response) => {
+        console.log(response)
+        res.end(JSON.stringify(response));
+      });
+
+  } else if ( req.method === 'POST' ) {
     res.statusCode = 200;
     req.body.forEach(document => {
       const { url, analyticType, time, startTime } = document;
@@ -48,12 +70,13 @@ app.use((req, res, next) => {
         url,
         analyticType,
         time,
-        startTime
+        startTime,
+        createdAt: new Date().getTime()
       });
 
       newAnalytics.save()
         .then((analytic) => {
-          console.log("analytic",analytic);
+          console.log("analytic", analytic);
 
           return Analytics.find({}).exec();
         })
@@ -65,13 +88,11 @@ app.use((req, res, next) => {
     res.end();
 
 
-  }
-  else if (req.method === 'PUT') {
+  } else if ( req.method === 'PUT' ) {
     res.statusCode = 405;
     res.end('<html><body><h1>Error 405: ' + req.method +
       ' not allowed</h1></body></html>');
-  }
-  else if (req.method === 'DELETE') {
+  } else if ( req.method === 'DELETE' ) {
     res.statusCode = 405;
     res.end('<html><body><h1>Error 405: ' + req.method +
       ' not allowed</h1></body></html>');
