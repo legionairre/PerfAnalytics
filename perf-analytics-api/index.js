@@ -20,7 +20,7 @@ let requestCount = 0;
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-
+app.disable('etag');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -35,6 +35,8 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Max-Age', '86400');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader('Cache-Control', 'public, max-age=0');
   console.log(req.method);
   if ( req.method === 'OPTIONS' ) {
     res.statusCode = 200;
@@ -44,7 +46,7 @@ app.use((req, res, next) => {
     const { beginTime, endTime } = req.query;
 
     console.log(Number(beginTime), Number(endTime))
-    return Analytics.find({
+    const query =  Analytics.find({
       $and:
         [
           {
@@ -56,12 +58,16 @@ app.use((req, res, next) => {
               { $lte: Number(endTime) }
           }
         ]
-    })
-      .then((response) => {
-        console.log(response)
-        res.end(JSON.stringify(response));
-      });
-
+    }).limit(1000);
+    query.exec((err, response) => {
+      if (err) {
+        res.statusCode=500;
+        res.send(JSON.stringify(err));
+      }
+      else {
+        res.send(JSON.stringify(response));
+      }
+    });
   } else if ( req.method === 'POST' ) {
     res.statusCode = 200;
     req.body.forEach(document => {
