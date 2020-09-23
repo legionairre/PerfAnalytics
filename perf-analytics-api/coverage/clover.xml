@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1600899200067" clover="3.2.0">
+  <project timestamp="1600899200067" name="All files">
+    <metrics statements="57" coveredstatements="57" conditionals="9" coveredconditionals="9" methods="8" coveredmethods="8" elements="74" coveredelements="74" complexity="0" loc="57" ncloc="57" packages="1" files="2" classes="2"/>
+    <file name="models.js" path="/Users/gkivanc/PerfAnalytics/perf-analytics-api/models.js">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="29" count="1" type="stmt"/>
+      <line num="31" count="1" type="stmt"/>
+    </file>
+    <file name="server.js" path="/Users/gkivanc/PerfAnalytics/perf-analytics-api/server.js">
+      <metrics statements="52" coveredstatements="52" conditionals="9" coveredconditionals="9" methods="8" coveredmethods="8"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+      <line num="30" count="1" type="stmt"/>
+      <line num="31" count="1" type="stmt"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
+      <line num="36" count="1" type="stmt"/>
+      <line num="37" count="7" type="stmt"/>
+      <line num="38" count="7" type="cond" truecount="5" falsecount="0"/>
+      <line num="39" count="5" type="stmt"/>
+      <line num="41" count="2" type="stmt"/>
+      <line num="42" count="2" type="stmt"/>
+      <line num="47" count="2" type="stmt"/>
+      <line num="48" count="2" type="stmt"/>
+      <line num="50" count="2" type="stmt"/>
+      <line num="63" count="2" type="stmt"/>
+      <line num="64" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="65" count="1" type="stmt"/>
+      <line num="66" count="1" type="stmt"/>
+      <line num="68" count="1" type="stmt"/>
+      <line num="74" count="3" type="stmt"/>
+      <line num="75" count="3" type="stmt"/>
+      <line num="76" count="3" type="stmt"/>
+      <line num="77" count="2" type="stmt"/>
+      <line num="78" count="2" type="stmt"/>
+      <line num="79" count="2" type="stmt"/>
+      <line num="80" count="2" type="stmt"/>
+      <line num="87" count="2" type="stmt"/>
+      <line num="88" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="89" count="1" type="stmt"/>
+      <line num="90" count="1" type="stmt"/>
+      <line num="91" count="1" type="stmt"/>
+      <line num="93" count="1" type="stmt"/>
+      <line num="94" count="1" type="stmt"/>
+      <line num="95" count="1" type="stmt"/>
+      <line num="101" count="1" type="stmt"/>
+      <line num="103" count="1" type="stmt"/>
+      <line num="104" count="1" type="stmt"/>
+      <line num="107" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

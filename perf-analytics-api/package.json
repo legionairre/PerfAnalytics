@@ -2,17 +2,33 @@
   "name": "perf-analytics-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "node server",
+    "test": "jest --forceExit --coverage",
+    "test-dev": "npm test"
   },
   "author": "Guclu Kivanc",
   "license": "ISC",
   "dependencies": {
+    "@jest/globals": "^26.4.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.6",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "axios": "^0.20.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cross-env": "^7.0.2",
+    "jest": "^26.4.2",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
