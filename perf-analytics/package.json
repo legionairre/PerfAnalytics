@@ -1,0 +1,11 @@
+{
+  "name": "perf-analytics-gkivanc",
+  "version": "1.0.0",
+  "description": "PerfAnalytics.JS is a client-side library, which collects some performance related key metrics from browser and sends to the PerfAnalytics.API",
+  "main": "PerfAnalytics.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guclu Kivanc",
+  "license": "ISC"
+}
