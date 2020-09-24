@@ -9,11 +9,17 @@ window.onload = function(){
     const performanceEntries = performance.getEntriesByType('paint');
     const performanceEntryResources = performance.getEntriesByType('resource');
     const performanceEntryNavigations = performance.getEntriesByType('navigation');
+    let fcpVal = 0;
+    let ttfbVal = 0;
+    let domLoadVal = 0;
+    let windowLoadVal = 0;
 
-    const ttfbVal = (perfTiming.responseStart - perfTiming.requestStart).toFixed(2);
-    const fcpVal = (performanceEntries[1].startTime).toFixed(2);
-    const domLoadVal = (perfTiming.domComplete - perfTiming.domLoading).toFixed(2);
-    const windowLoadVal = (perfTiming.loadEventEnd - perfTiming.navigationStart).toFixed(2);
+    if(performanceEntries && performanceEntries.length > 1) {
+      fcpVal = (performanceEntries[1].startTime).toFixed(2);
+      ttfbVal = (perfTiming.responseStart - perfTiming.requestStart).toFixed(2);
+      domLoadVal = (perfTiming.domComplete - perfTiming.domLoading).toFixed(2);
+      windowLoadVal = (perfTiming.loadEventEnd - perfTiming.navigationStart).toFixed(2);
+    }
 
     let body = [
       {
@@ -62,11 +68,14 @@ window.onload = function(){
       console.log(e.name + ':\nStart Time: ' + e.startTime.toFixed(2) + 'ms\nDuration:  ' + e.duration.toFixed(2) + 'ms');
     });
 
-    fetch(API_URL, {
-      method: POST,
-      headers: HEADERS,
-      body: JSON.stringify(body),
-    })
+    if(performanceEntries && performanceEntries.length > 1 ) {
+      fetch(API_URL, {
+        method: POST,
+        headers: HEADERS,
+        body: JSON.stringify(body),
+      })
+    }
+
 
   }, 0);
 }
