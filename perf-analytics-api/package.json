@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "test": "jest --forceExit --coverage",
-    "test-dev": "npm test"
+    "test": "jest --forceExit",
+    "test:coverage": "jest --forceExit --coverage"
   },
   "author": "Guclu Kivanc",
   "license": "ISC",
