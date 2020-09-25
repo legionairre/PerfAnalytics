@@ -13,6 +13,7 @@ window.onload = function(){
     let ttfbVal = 0;
     let domLoadVal = 0;
     let windowLoadVal = 0;
+    const createdAt = new Date().getTime();
 
     if(performanceEntries && performanceEntries.length > 1) {
       fcpVal = (performanceEntries[1].startTime).toFixed(2);
@@ -25,27 +26,33 @@ window.onload = function(){
       {
         url: window.location.href,
         analyticType: 'TTFB',
-        time: ttfbVal
+        time: ttfbVal,
+        createdAt
       },
       {
         url: window.location.href,
         analyticType: 'FCP',
-        time: fcpVal
+        time: fcpVal,
+        createdAt
       },
       {
         url: window.location.href,
         analyticType: 'DOM_LOAD',
-        time: domLoadVal
+        time: domLoadVal,
+        createdAt
       },
       {
         url: window.location.href,
         analyticType: 'WINDOW_LOAD',
-        time: windowLoadVal
+        time: windowLoadVal,
+        createdAt
       }
     ];
 
     console.log('TTFB (Server response time or Time to First Byte): ', (perfTiming.responseStart - perfTiming.requestStart).toFixed(2) + "ms");
-    console.log('FCP: The time to ' + performanceEntries[1].name + " was " + (performanceEntries[1].startTime).toFixed(2) + "ms");
+    if(performanceEntries && performanceEntries.length > 1) {
+      console.log('FCP: The time to ' + performanceEntries[1].name + " was " + (performanceEntries[1].startTime).toFixed(2) + "ms");
+    }
     console.log('Dom Loading / Page Render Time: ', (perfTiming.domComplete - perfTiming.domLoading).toFixed(2) + "ms");
     console.log('Window Load / Total Page Load Time: ', (perfTiming.loadEventEnd - perfTiming.navigationStart).toFixed(2) + "ms");
     console.log('--------- Document, Image, Font, JS, and CSS StartTime and Duration --------');
@@ -54,7 +61,8 @@ window.onload = function(){
         url: e.name,
         analyticType: e.initiatorType,
         time: e.duration.toFixed(2),
-        startTime: e.startTime.toFixed(2)
+        startTime: e.startTime.toFixed(2),
+        createdAt
       })
       console.log(e.name + ':\nStart Time: ' + e.startTime.toFixed(2) + 'ms\nDuration:  ' + e.duration.toFixed(2) + 'ms');
     });
@@ -63,7 +71,8 @@ window.onload = function(){
         url: e.name,
         analyticType: e.initiatorType,
         time: e.duration.toFixed(2),
-        startTime: e.startTime.toFixed(2)
+        startTime: e.startTime.toFixed(2),
+        createdAt
       })
       console.log(e.name + ':\nStart Time: ' + e.startTime.toFixed(2) + 'ms\nDuration:  ' + e.duration.toFixed(2) + 'ms');
     });
