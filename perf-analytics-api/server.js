@@ -7,14 +7,13 @@ const mongoose = require('mongoose');
 
 const Analytics = require('./models');
 
-const hostname = 'localhost';
 const port = 5000;
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://mongo:27017/docker-node-api-mongo';
 const connect = mongoose.connect(url);
 
-connect.then((db) => {
-  console.log('Connected correctly to server to db');
-})
+connect
+  .then(() => console.log('MongoDB Connected Correctly'))
+  .catch(err => console.log(err));
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -35,6 +34,8 @@ app.use(express.static(__dirname + '/public'));
 
 app.all('/', (req, res, next) => {
   res.header(headers);
+  requestCount++;
+  console.log('Request Number: ', requestCount);
   if ( req.method === 'GET' || req.method === 'POST' || req.method === 'OPTIONS') {
     next();
   } else {
@@ -94,14 +95,19 @@ app.all('/', (req, res, next) => {
           res.statusCode = 200;
           res.end();
         }
-      })
+      }).then(() => res.redirect('/'))
+        .catch((err) => {
+          res.statusCode = 500;
+          console.log(err);
+          res.end();
+        });
     });
   }))
 
 const server = http.createServer(app);
 
-server.listen(port, hostname, () => {
-  console.log(`PerfAnalytics API running at http://${hostname}:${port}`);
+server.listen(port, () => {
+  console.log(`PerfAnalytics API running...`);
 })
 
 module.exports = app;
