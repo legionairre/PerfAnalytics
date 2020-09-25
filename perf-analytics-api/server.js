@@ -95,12 +95,7 @@ app.all('/', (req, res, next) => {
           res.statusCode = 200;
           res.end();
         }
-      }).then(() => res.redirect('/'))
-        .catch((err) => {
-          res.statusCode = 500;
-          console.log(err);
-          res.end();
-        });
+      })
     });
   }))
 
